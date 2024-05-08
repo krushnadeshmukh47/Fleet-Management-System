@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb://localhost:27017/bus_booking3",
+    "jwtSecret":"mysecrettoken"
+}
