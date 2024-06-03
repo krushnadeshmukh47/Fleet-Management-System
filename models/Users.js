@@ -1,5 +1,25 @@
 const mongoose = require('mongoose')
 
+const TicketSchema = new mongoose.Schema({
+    busId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Bus',
+      required: true
+    },
+    seatNumbers: {
+      type: [Number],
+      required: true
+    },
+    amount: {
+      type: Number,
+      required: true
+    },
+    bookingDate: {
+      type: Date,
+      default: Date.now
+    }
+  });
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -22,7 +42,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    ticket: [Object],
+    tickets: [TicketSchema],
 
     date: {
         type: Date,

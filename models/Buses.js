@@ -13,8 +13,8 @@ const BusSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    departureDateTime: { // Modified field name to departureDateTime
-        type: Date, // Include date and time
+    departureDateTime: {
+        type: Date,
         required: true
     },
     arrivalTime: {
@@ -35,14 +35,12 @@ const BusSchema = new mongoose.Schema({
     }
 });
 
-// Pre-save hook to generate seat numbers
 BusSchema.pre('save', function(next) {
     const bus = this;
     if (!bus.isNew) {
-        return next(); // Skip if not a new bus
+        return next();
     }
 
-    // Generate seat numbers
     const totalSeats = 30;
     for (let i = 1; i <= totalSeats; i++) {
         bus.seats.push({ number: i, booked: false });
@@ -50,14 +48,13 @@ BusSchema.pre('save', function(next) {
     next();
 });
 
-// Method to book a seat
 BusSchema.methods.bookSeat = function(seatNumber) {
     const seat = this.seats.find(seat => seat.number === seatNumber);
     if (seat && !seat.booked) {
         seat.booked = true;
-        return true; // Seat booked successfully
+        return true;
     }
-    return false; // Seat already booked or does not exist
+    return false;
 };
 
 module.exports = mongoose.model('Bus', BusSchema);

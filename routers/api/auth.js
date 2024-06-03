@@ -8,12 +8,6 @@ const config = require('config')
 const { check, validationResult } = require('express-validator');
 
 
-// router.get('/', auth, (req, res) => res.send('Auth Route'));
-
-
-
-
-
 
 router.get('/', auth, async (req, res) => {
     try {

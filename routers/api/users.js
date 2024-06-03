@@ -16,20 +16,17 @@ const { JsonWebTokenError } = require('jsonwebtoken');
 
 router.get('/me', auth, async (req, res) => {
     try {
-        const profile = await (await User.findOne({ user: req.body.id }))
+        const user = await User.findById(req.user.id);
 
-
-        if (!profile) {
-            return res.status(400).json({ msg: 'There is no profile for this user' })
-
+        if (!user) {
+            return res.status(400).json({ msg: 'There is no profile for this user' });
         }
 
-        res.json(profile)
+        res.json(user);
     } catch (err) {
-        console.error(err.message)
-        res.status(500).send('Server Error')
+        console.error(err.message);
+        res.status(500).send('Server Error');
     }
-
 });
 
 // get all profiles
@@ -133,33 +130,5 @@ router.put(
         }
     }
 );
-
-// @route    DELETE api/profile/experience/:bus_id
-// @desc     Delete Buses
-// @access   Private
-
-router.delete('/buses/:bus_id', auth, async (req, res) => {
-    try {
-        const foundProfile = await User.findOne({ user: req.body.id });
-
-        foundProfile.buses = foundProfile.buses.filter(
-            (bus) => bus._id.toString() !== req.params.bus_id
-        );
-
-        await foundProfile.save();
-        return res.status(200).json(foundProfile)
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ msg: 'Server error' });
-    }
-});
-
-
-
-
-
-
-
-
 
 module.exports = router;
