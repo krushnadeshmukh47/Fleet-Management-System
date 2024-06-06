@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => res.send("bus part"));
 
+// Route to create a bus
 router.post("/", async (req, res) => {
     try {
         const { name, company, stops, departureDateTime, arrivalTime, fare } = req.body;
@@ -23,6 +24,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+//Route to get bus details using start, end and departure date
 router.get("/:start/:end/:departureDate", async (req, res) => {
     const { start, end, departureDate } = req.params;
     const stops_ = [start, end];
@@ -53,6 +55,7 @@ router.get("/:start/:end/:departureDate", async (req, res) => {
     }
 });
 
+// Route to get bus using id
 router.get('/:id', async (req, res) => {
     try {
         const bus = await Buses.findById(req.params.id);
@@ -103,7 +106,7 @@ router.post('/:id/book-seats', async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: 'Server error', error });
     }
-  }); 
+  });
 
 /*router.post('/:id/book-seats', async (req, res) => {
     try {

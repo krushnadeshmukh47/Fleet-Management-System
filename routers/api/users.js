@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
 });
 
 
-
+// Route to register a new user
 router.post('/', [
     check('name', 'Name is required')
         .not()

@@ -8,7 +8,6 @@ const config = require('config')
 const { check, validationResult } = require('express-validator');
 
 
-
 router.get('/', auth, async (req, res) => {
     try {
         const user = await (await User.findById(req.user.id))
@@ -20,7 +19,7 @@ router.get('/', auth, async (req, res) => {
 
 });
 
-
+// Route for user login
 router.post('/', [
     check('email', 'Please add a valid email').isEmail(),
     check('password', 'please enter a password').exists()
