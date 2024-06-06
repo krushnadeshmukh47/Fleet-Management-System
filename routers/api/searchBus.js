@@ -69,7 +69,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Route to book seats and store ticket
-router.post('/:id/book-seats', async (req, res) => {
+/*router.post('/:id/book-seats', async (req, res) => {
     try {
       const { seatNumbers, userId, amount } = req.body;
       const bus = await Bus.findById(req.params.id);
@@ -106,9 +106,9 @@ router.post('/:id/book-seats', async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: 'Server error', error });
     }
-  });
+  });*/
 
-/*router.post('/:id/book-seats', async (req, res) => {
+router.post('/:id/book-seats', async (req, res) => {
     try {
       const { seatNumbers } = req.body;
       const bus = await Buses.findById(req.params.id);
@@ -126,6 +126,6 @@ router.post('/:id/book-seats', async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: 'Server error', error });
     }
-  });  */
+  }); 
 
 module.exports = router;
